@@ -1,0 +1,60 @@
+" Keybinds
+map ; :
+
+" Plugin binds
+map <C-f> :FZF<CR>
+map <C-n> :NERDTreeToggle<CR>
+
+" NERDTree config
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" Airline config
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='minimalist'
+
+" FZF config
+let g:fzf_preview_window = ['right:50%', 'ctrl-/']
+map <C-b> :Buffers<CR>
+map <C-p> :Rg<CR>
+map <C-g> :Tags<CR>
+map <C-t> <C-]>
+map <C-e> :!ctags -R<CR><CR>
+
+" LaTeX config
+let g:tex_flavor  = 'latex'
+let g:tex_conceal = ''
+let g:vimtex_fold_manual = 1
+let g:vimtex_compiler_progname = 'nvr'
+let g:vimtex_view_method = 'zathura'
+
+" Quickfix panel
+map <C-h> :cp<CR>
+map <C-k> :cn<CR>
+map <C-m> :copen<CR>
+
+" Line numbers
+set nu
+
+" Tabs
+set autoindent
+set tabstop=4 shiftwidth=4 expandtab
+
+" Searching
+set ignorecase
+set smartcase
+
+" Colors
+syntax enable            
+colo elflord
+
+" Buffer management
+map <C-v> :bp<CR>
+map <C-c> :bd<CR>
+set autowriteall
+
+" Menus and handling
+filetype plugin indent on
+set wildmenu
+set wildmode=longest:list,full
+set noswapfile
+set mouse=a

@@ -1,0 +1,195 @@
+;
+; Polybar Configuration
+;
+
+; Sourbar Initialization
+[bar/sourbar]
+
+    ; Display information
+    monitor = DVI-D-0
+    width = 100%
+    height = 27
+    radius = 0
+    fixed-center = true
+
+    ; Themeing
+    background = #FFFFFF 
+    foreground = #404552
+    line-size = 3
+    line-color =
+    border-size = 0
+    border-color =
+    padding-left = 0
+    padding-right = 2
+    module-margin-left = 1
+    module-margin-right = 2
+    font-0 = "Source Code Pro Semibold:size=10;1"
+    font-1 = "Font Awesome 5 Free:style=Solid:size=10;1"
+    font-2 = "Font Awesome 5 Brands:size=10;1"
+
+    ; Modules
+    ; Set module locations here.
+    modules-left = eth isrunning-openvpn
+    modules-center = i3
+    modules-right = info-wire info-redshift-temp pulseaudio-tail date powermenu 
+
+    ; Tray settings
+    ;tray-position =
+    ;tray-padding =
+
+    ; Cursor settings
+    cursor-click = pointer
+    cursor-scroll = ns-resize
+
+; i3wm settings
+[module/i3]
+
+    ; Workspace indications
+    type = internal/i3
+    format = <label-state> <label-mode>
+    index-sort = true
+    wrapping-scroll = false
+
+    label-mode-padding = 2 
+    label-mode-foreground = #FFFFFF
+    label-mode-background = #A5CCFF
+
+    label-focused = %index%
+    label-focused-background = #bad7fc
+    label-focused-foreground = #FFFFFFF
+    label-focused-padding = 2
+
+    label-unfocused = %index%
+    label-unfocused-background = #A5CCFF
+    label-unfocused-foreground = #FFFFFF
+    label-unfocused-padding = 2
+
+    label-visible = %index%
+    label-visible-background = #A5CCFF
+    label-visible-foreground = #FFFFFF
+    label-visible-padding = 2
+
+    label-urgent = %index%
+    label-urgent-background = #bad7fc
+    label-urgent-padding = 2
+
+; WLAN Module (not applicable for desktop Ethernet)
+[module/wlan]
+
+    type = internal/network
+    interface = net1
+    interval = 3.0
+
+    format-connected = <ramp-signal> <label-connected>
+    format-connected-foreground = #2f2f38
+    format-connected-background = #c9dffc
+    format-connected-padding = 2
+    label-connected = %essid%
+
+    format-disconnected =
+
+    ramp-signal-0 = 
+    ramp-signal-1 = 
+    ramp-signal-2 = 
+    ramp-signal-3 = 
+    ramp-signal-4 = 
+    ramp-signal-foreground = #2f2f38
+
+; Ethernet Modules (not applicable for wNIC connections)
+[module/eth]
+
+    type = internal/network
+    interface = enp0s31f6
+    interval = 5
+
+    format-connected-padding = 2
+    format-connected-foreground = #404552
+    format-connected-background = #c9dffc
+    format-connected-prefix = " "
+    format-connected-prefix-foreground = #2f2f38
+    label-connected = %local_ip%
+
+    format-disconnected =
+    
+; VPN Indicator
+[module/isrunning-openvpn]
+
+    type = custom/script
+    exec = $HOME/.config/polybar/polybar-scripts/isrunning-openvpn.sh
+    interval = 5
+    
+; Date module
+[module/date]
+
+    type = internal/date
+    interval = 1
+
+    date = 
+    date-alt = " %A %d %b %Y"
+
+    time = " %l:%M"
+    time-alt = " %l:%M:%S"
+
+    format-prefix = 
+    format-foreground = #404552
+    format-background = #c9dffc
+    format-padding = 2
+
+    label = %time% %date%
+
+; Power (off, reboot, etc) menu
+[module/powermenu]
+
+    type = custom/menu
+    expand-right = true
+    format-spacing = 1
+
+    label-open = 
+    label-open-foreground = #404552
+    label-close =  cancel
+    label-close-foreground = #404552
+    label-separator = | 
+    label-separator-foreground = #404552
+
+    menu-0-0 = reboot
+    menu-0-0-exec = reboot
+    menu-0-1 = power off
+    menu-0-1-exec = shutdown now
+    menu-0-2 = log off
+    menu-0-2-exec = pkill -KILL -u $USER
+
+; Pulseaudio controls
+[module/pulseaudio-tail]
+
+    type = custom/script
+    exec =$HOME/.config/polybar/polybar-scripts/pulseaudio-tail.sh
+    tail = true
+    click-right = exec pavucontrol &
+    click-left = $HOME/.config/polybar/polybar-scripts/pulseaudio-tail.sh --mute
+    scroll-up = $HOME/.config/polybar/polybar-scripts/pulseaudio-tail.sh --up
+    scroll-down = $HOME/.config/polybar/polybar-scripts/pulseaudio-tail.sh --down
+
+; Redshift module
+[module/info-redshift-temp]
+
+    type = custom/script
+    exec = ~/.config/polybar/polybar-scripts/info-redshift-temp.sh
+    interval = 3
+    click-left = exec redshift &
+    click-right = exec pkill redshift &
+
+; Wire messaging platform module
+[module/info-wire]
+
+    type = custom/script
+    exec = ~/.config/polybar/polybar-scripts/info-wire.sh
+    interval = 5
+    click-left = exec wire &
+
+
+; Global settings
+[global/wm]
+    
+    margin-top = 0
+    margin-bottom = 0
+

@@ -1,0 +1,17 @@
+######################
+#                    #
+# Rofi Configuration #
+#                    #
+######################
+
+# rofi.theme: /usr/share/rofi/themes/Arc-Dark.rasi
+
+rofi.color-enabled: true
+
+# Window           background    border    separator
+rofi.color-window: #FFFFFF,      #FFFFFF,  #FFFFFF
+
+# State:           bg       fg       bgalt    hlbg     hlfg
+rofi.color-normal: #FFFFFF, #404552, #FFFFFF, #FFFFFF, #A5CCFF
+rofi.color-active: #FFFFFF, #404552, #FFFFFF, #FFFFFF, #A5CCFF
+rofi.color-urgent: #FFFFFF, #404552, #FFFFFF, #FFFFFF, #A5CCFF
